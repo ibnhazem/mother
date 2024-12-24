@@ -1,0 +1,6 @@
+add 5;              // Missing second argument
+subtract ,2;        // Missing first argument
+return add;         // Unexpected keyword after return
+add 10 20;          // Missing separator (comma)
+subtract abc,5;     // Invalid argument type (non-numeric constant)
+return;
