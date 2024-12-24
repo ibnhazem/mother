@@ -1,0 +1,4 @@
+MOV R1, 5;
+MOV R2, 5;
+CMP R1, R2;
+RETURN;

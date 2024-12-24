@@ -1,0 +1,4 @@
+MOV R1;
+MOV , 10;
+MOV R2, abc;
+RETURN;

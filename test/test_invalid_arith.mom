@@ -1,0 +1,5 @@
+ADD R1;
+SUB R2,;
+MUL R1, abc;
+DIV R1, 0;
+RETURN;

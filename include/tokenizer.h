@@ -1,10 +1,11 @@
 #ifndef TOKENIZER_H
 #define TOKENIZER_H
 
-#include "isInDictionary.h"
-#include "types.h" // Shared definitions like TokenType and Translation
+#include "types.h"
+#include <stdio.h>
 
-void addToken(int lineNum, TokenType type, const char* lexeme);
+// Functions
 void tokenize(FILE *file);
+void addToken(int lineNum, CommandType command, Argument *args, int argCount);
 
 #endif // TOKENIZER_H

@@ -1,6 +1,3 @@
-src/isInDictionary
-src/keywords
-src/main
-src/test.mom
+docs/*
 .vscode/launch.json
 mother.code-workspace

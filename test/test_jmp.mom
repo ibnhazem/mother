@@ -1,0 +1,6 @@
+MOV R1, 5;
+JMP SKIP;
+MOV R2, 10; // This line should be skipped
+SKIP:
+MOV R3, 20;
+RETURN;

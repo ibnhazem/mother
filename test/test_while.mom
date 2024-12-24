@@ -1,0 +1,5 @@
+MOV R1, 5;
+WHILE R1;
+    SUB R1, 1;
+ENDWHILE;
+RETURN;

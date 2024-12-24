@@ -1,22 +1,28 @@
 # Compiler settings
 CC = gcc
-CFLAGS = -Wall -Iinclude
+CFLAGS = -Wall -Iinclude -g
 
 # Target executable
 TARGET = compiler
 
-# Source files
+# Source and object files
 SRCS = src/main.c src/tokenizer.c src/parser.c src/executor.c src/isInDictionary.c
-
-# Object files
 OBJS = $(SRCS:.c=.o)
 
-# Build rules
-$(TARGET): $(OBJS)
-	$(CC) -o $@ $(OBJS)
+# Default target
+all: $(TARGET)
 
+# Build the target executable
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
+
+# Pattern rule for compiling source files into object files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean up build artifacts
 clean:
 	rm -f $(OBJS) $(TARGET)
+
+# PHONY targets to prevent conflicts with files named "clean" or "all"
+.PHONY: all clean
