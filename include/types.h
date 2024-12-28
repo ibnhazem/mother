@@ -17,7 +17,8 @@ typedef enum {
     CMD_JMP,       // Jump to a label
     CMD_CMP,       // Compare two registers
     CMD_RETURN,    // Return from the program or loop
-    CMD_LABEL      // Represents a label in the program (e.g., "LABEL:")
+    CMD_LABEL,     // Represents a label in the program (e.g., "LABEL:")
+    CMD_DUMP       // Dump the state of all registers
 } CommandType;
 
 

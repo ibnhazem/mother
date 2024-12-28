@@ -10,6 +10,11 @@ int validateTokens() {
 
     for (int i = 0; i < tokenCount; i++) {
         Token token = tokens[i];
+
+        // // Debug: Print the token being validated
+        // printf("Validating token: command=%d, argCount=%d, lineNum=%d\n", 
+        //        token.command, token.argCount, token.lineNum);
+
         switch (token.command) {
             case CMD_MOV:
                 if (token.argCount != 2 || token.args[0].type != ARG_REGISTER || token.args[1].type != ARG_CONSTANT) {
@@ -84,11 +89,19 @@ int validateTokens() {
                 }
                 break;
 
+            case CMD_DUMP:
+                if (token.argCount != 0) {
+                    fprintf(stderr, "Error: 'DUMP' should have no arguments at line %d.\n", token.lineNum);
+                    return 0;
+                }
+                break;
+
             default:
                 fprintf(stderr, "Error: Unknown command at line %d.\n", token.lineNum);
                 return 0;
         }
     }
+
 
     if (whileCount > 0) {
         fprintf(stderr, "Error: Unmatched 'WHILE' loop.\n");

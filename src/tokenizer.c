@@ -27,13 +27,18 @@ void tokenize(FILE *file) {
     char line[MAX_LEXEME_LENGTH];
     int lineNum = 1;
 
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file)) { // Ignore empty lines
+        if (strlen(line) == 0 || line[0] == '\0') continue;
+        
         char *commandStr = strtok(line, " ;\n"); // Treat semicolon as a delimiter
         if (!commandStr) continue;
 
         CommandType command;
         Argument args[2];
         int argCount = 0;
+
+        // // Debug: Print the line being tokenized
+        // printf("Processing line %d: '%s'\n", lineNum, line);
 
         // Check for labels (e.g., "LABEL:")
         if (strchr(commandStr, ':')) {
@@ -56,6 +61,7 @@ void tokenize(FILE *file) {
         else if (strcmp(commandStr, "RETURN") == 0) command = CMD_RETURN;
         else if (strcmp(commandStr, "JMP") == 0) command = CMD_JMP;
         else if (strcmp(commandStr, "CMP") == 0) command = CMD_CMP;
+        else if (strcmp(commandStr, "DUMP") == 0) command = CMD_DUMP;
         else {
             fprintf(stderr, "Error: Invalid command '%s' at line %d.\n", commandStr, lineNum);
             continue;
@@ -78,6 +84,9 @@ void tokenize(FILE *file) {
             argCount++;
         }
 
+        // // Debug: Print the command parsed
+        // printf("Parsed command: %s (argCount: %d)\n", commandStr, argCount);
+
         // Validate argument count
         if ((command == CMD_MOV || command == CMD_ADD || command == CMD_SUB || command == CMD_MUL || command == CMD_DIV) && argCount != 2) {
             fprintf(stderr, "Error: Invalid argument count for '%s' at line %d.\n", commandStr, lineNum);
@@ -85,8 +94,8 @@ void tokenize(FILE *file) {
         } else if ((command == CMD_JMP || command == CMD_CMP || command == CMD_WHILE) && argCount != 1) {
             fprintf(stderr, "Error: Invalid argument count for '%s' at line %d.\n", commandStr, lineNum);
             continue;
-        } else if (command == CMD_RETURN && argCount != 0) {
-            fprintf(stderr, "Error: 'RETURN' should have no arguments at line %d.\n", lineNum);
+        } else if ((command == CMD_RETURN || command == CMD_DUMP) && argCount != 0) {
+            fprintf(stderr, "Error: '%s' should have no arguments at line %d.\n", commandStr, lineNum);
             continue;
         }
 

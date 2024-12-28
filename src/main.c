@@ -27,3 +27,30 @@ int main(int argc, char *argv[]) {
 
     return EXIT_SUCCESS;
 }
+
+/*
+    1. Arithmatic calculations
+        tests:
+            add
+            subtract
+            multiply
+            div
+            invalid arithmatic
+
+    3. Check the WHILE command
+        test:
+            while
+            invalid while
+
+    4. CMP. Should be pretty easy.
+        test:
+            cmp
+    5. JMP.
+        test:
+            jmp
+            invalid jmp cmp
+    Overall
+        test:
+            test_all
+
+    */
